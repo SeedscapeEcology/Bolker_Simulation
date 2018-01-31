@@ -1,0 +1,33 @@
+set.seed(1001) # setting the random number generator
+L <- 30 # maximum range
+nparents <- 50 # number of starting parents
+offspr_per_parent <- 10 # yup
+noffspr <- nparents * offspr_per_parent # total offspring
+dispdist <- 2 # dispersal distance
+
+parent_x <- runif(nparents, min = 0, max = L) # parent x value from uniform distribution
+parent_y <- runif(nparents, min = 0, max = L) # parent y value from uinform distribution
+
+angle <- runif(noffspr, min = 0, max = 2 * pi) # angle of dispersal from uniform distribution
+dist <- rexp(noffspr, 1/dispdist) # distance of dispersal from exponential distribution (fixed distance?)
+
+offspr_x <- rep(parent_x, each = offspr_per_parent) + cos(angle) * dist # offspring x location: repeat parent x value for each offspring + cosine angle times distance
+offspr_y <- rep(parent_y, each = offspr_per_parent) + sin(angle) * dist # same as before
+
+pos <- cbind(offspr_x, offspr_y) # binding the x and y values together
+ndist <- as.matrix(dist(pos, upper = TRUE, diag = TRUE)) # distance to the nearest neighbor
+nbrcrowd <- rowSums(ndist < 2) - 1 # number of things that crowd out the focal individual
+
+ci <- nbrcrowd * 3 # crowding times 3
+m <- 2.3
+alpha <- 0.49
+Mass_det <- m/(1+ci) # threshold is 2.3
+Mass <- rgamma(length(Mass_det), scale = Mass_det, shape = alpha) # return a mass value from gamma distribution
+
+b <- 271.6
+k <- 0.569
+seed_det <- b * Mass # mean for the binomial
+seed = rnbinom(length(seed_det), mu = seed_det, size = k) # binomial distribution of the seed size (integer values centered at mu)
+
+
+# We would need to add a separate system for the fungi and an interaction so they would be antagonistic
