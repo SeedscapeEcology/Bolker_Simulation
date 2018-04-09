@@ -3,7 +3,7 @@ L <- 30 # maximum range
 nparents <- 30 # number of starting parents
 offspr_per_parent <- 100 # yup
 noffspr <- nparents * offspr_per_parent # total offspring
-dispdist <- 2 # dispersal distance
+dispdist <- 3 # dispersal distance
 
 parent_x <- runif(nparents, min = 0, max = L) # parent x value from uniform distribution
 parent_y <- runif(nparents, min = 0, max = L) # parent y value from uinform distribution
