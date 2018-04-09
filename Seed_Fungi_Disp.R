@@ -1,6 +1,6 @@
 ## set.seed(1001) # setting the random number generator
 L <- 30 # maximum range
-nparents <- 10 # number of starting parents
+nparents <- 30 # number of starting parents
 offspr_per_parent <- 100 # yup
 noffspr <- nparents * offspr_per_parent # total offspring
 dispdist <- 2 # dispersal distance
@@ -48,8 +48,8 @@ names(fparent_xy) <- c("x", "y")
 names(foffspr_xy) <- c("x", "y")
 fungiloc <- rbind(fparent_xy, foffspr_xy) # all fungi locations
 
-plot(parent_xy, col="black")
-points(offspr_pos, col="green")
+plot(offspr_pos, col="green")
+points(parent_xy, col="black")
 points(fparent_xy, col="red")
 points(foffspr_xy, col="orange")
 
