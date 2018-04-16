@@ -23,6 +23,7 @@ offspr_pos <- data.frame(offspr_x=offspr_x, offspr_y=offspr_y) # binding the x a
 f_colonies <- 5
 f_spores <- 200 # it's probably a lot more(?)
 f_dispdist <- .5
+
 p_infection <- 0.25
 f_movedist <- 5
 
@@ -35,6 +36,7 @@ fangle <- runif(f_spores, min = 0, max = 2*pi) # list of angles to shoot off the
 fdist <- rexp(f_spores, 1/f_dispdist) # distances to shoot off spores
 foffspr_x <- rep(fparent_xy$x, each = f_spores) + cos(fangle) * fdist
 foffspr_y <- rep(fparent_xy$y, each = f_spores) + sin(fangle) * fdist
+
 
 foffspr_xy <- data.frame(foffspr_x=foffspr_x, foffspr_y=foffspr_y) # landing locations of spores
 
@@ -59,6 +61,7 @@ pythagdist <- function(x1, x2, y1, y2){
     ydist2 = (y1-y2)^2
     zdist = sqrt(xdist2+ydist2)
     return(zdist)
+
 }
 
 #testlist <- pythagdist(treeloc$x, fungiloc$x, treeloc$y, fungiloc$y)
@@ -70,6 +73,7 @@ for (i in treeloc$x){
             return(treeloc$y[i])
         }
     }
+
 }
 # reset fungus to infected trees
 
